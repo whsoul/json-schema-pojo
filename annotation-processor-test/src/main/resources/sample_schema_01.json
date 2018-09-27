@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Sample Schema01",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "nvalue" : {
+      "type" : "null"
+    },
+    "age": {
+      "type": "integer"
+    },
+    "father": {
+      "$ref": "#"
+    },
+    "mother": {
+      "$ref": "#"
+    },
+    "university": {
+      "$ref": "#/definitions/University"
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": {}
+    }
+  },
+  "required": [
+    "name"
+    ,"address"
+    ,"age"
+  ],
+  "definitions": {
+    "University": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Location": {
+          "type": "object",
+          "additionalProperties": false,
+          "title" : "location",
+          "properties": {
+            "id" : {
+              "type" : "string"
+            },
+            "position": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "latitude": {
+                  "type": "string"
+                },
+                "longitude": {
+                  "type": "string"
+                }
+              },
+              "title": "pos",
+              "required": [
+                "latitude",
+                "longitude"
+              ]
+            }
+            ,"desc" : {
+              "type" : "string"
+            }
+          },
+          "required": [
+            "id",
+            "position"
+          ]
+        }
+      }
+    }
+  }
+}
