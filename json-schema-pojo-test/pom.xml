@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.whsoul</groupId>
-    <artifactId>annotation-processor-test</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <artifactId>json-schema-pojo-test</artifactId>
+    <version>0.1.0</version>
 
     <dependencies>
         <dependency>
             <groupId>com.whsoul</groupId>
-            <artifactId>annotation-processor</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <artifactId>json-schema-pojo</artifactId>
+            <version>0.1.0</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

@@ -5,12 +5,12 @@
     <parent>
         <artifactId>jschema-pojo</artifactId>
         <groupId>com.whsoul</groupId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>0.1.0</version>
         <relativePath>../</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>annotation-processor</artifactId>
+    <artifactId>json-schema-pojo</artifactId>
 
     <dependencies>
         <dependency>
@@ -77,9 +77,43 @@
             <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
-
-
     </dependencies>
+
+    <description>Simple Java POJO Class Generate with JsonSchema </description>
+    <url>https://github.com/whsoul/json-schema-pojo</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>https://opensource.org/licenses/Apache-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>whsoul</name>
+            <email>whsoul82@gmail.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/whsoul/json-schema-pojo</url>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>json-schema-pojo</id>
+            <url>https://api.bintray.com/maven/whsoul/jsonschema/json-schema-pojo/;publish=1</url>
+        </repository>
+    </distributionManagement>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <bintray.repo>whsoul/json-schema-pojo</bintray.repo>
+        <bintray.package>json-schema-pojo</bintray.package>
+    </properties>
 
     <build>
         <plugins>
@@ -93,6 +127,48 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.2</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- GPG sign -->
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-gpg-plugin</artifactId>-->
+                <!--<version>1.5</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>sign-artifacts</id>-->
+                        <!--<phase>verify</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>sign</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 </project>
