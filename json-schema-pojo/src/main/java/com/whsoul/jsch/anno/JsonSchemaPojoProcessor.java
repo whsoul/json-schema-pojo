@@ -31,7 +31,7 @@ public class JsonSchemaPojoProcessor extends AbstractProcessor {
     private enum JsonSchemaPojoType{
         packageName
         ,className
-        ,schemeUrl
+        ,schemaUrl
         ,typeMappingConfig
         ,baseConfig
         ,annotationConfig
@@ -69,9 +69,6 @@ public class JsonSchemaPojoProcessor extends AbstractProcessor {
 
         for(Element element : roundEnv.getElementsAnnotatedWith(JsonSchemaPojo.class)){
             JsonSchemaPojo pojogen = element.getAnnotation(JsonSchemaPojo.class);
-            System.out.println("annotation url : " + pojogen.schemeUrl());
-            System.out.println("annotation package : " + pojogen.packageName());
-            System.out.println("annotation class : " + pojogen.className());
 
             try {
                 List<? extends AnnotationMirror> annotationMirrors = element.getAnnotationMirrors();
@@ -89,36 +86,29 @@ public class JsonSchemaPojoProcessor extends AbstractProcessor {
                         String key = entry.getKey().getSimpleName().toString();
                         Object value = entry.getValue().getValue();
 
-                        System.out.println(key);
-
                         switch (JsonSchemaPojoType.valueOf(key)){
                             case typeMappingConfig : {
                                 Map<String, TypeName> map = toTypeMappingConfigMap(value);
-                                System.out.println(map);
                                 typeNameConfig = map;
                                 break;
                             }
                             case baseConfig: {
                                 Map<JSONSCHEMA_POJO_FEATURE, Boolean> map = toBaseConfigMap(value);
-                                System.out.println(map);
                                 baseConfig = map;
                                 break;
                             }
                             case annotationConfig: {
                                 Map<ANNOTATION_TYPE, AnnotationSpecFactory> map = toAnnotationConfigMap(value);
-                                System.out.println(map);
                                 annotationConfig = map;
                                 break;
                             }
                             case superclassConfig: {
                                 Map<TypeName, List<ClassName>> map = toSuperConfigMap(value);
-                                System.out.println(map);
                                 superclassConfig = map;
                                 break;
                             }
                             case superinterfaceConfig: {
                                 Map<TypeName, List<ClassName>> map = toSuperConfigMap(value);
-                                System.out.println(map);
                                 superinterfaceConfig = map;
                                 break;
                             }
@@ -135,16 +125,15 @@ public class JsonSchemaPojoProcessor extends AbstractProcessor {
 
                 InputStream inputStream = null;
                 try {
-                    if(pojogen.schemeUrl().startsWith("http")){
-                        inputStream = getInputStreamFromUrl(pojogen.schemeUrl());
+                    if(pojogen.schemaUrl().startsWith("http")){
+                        inputStream = getInputStreamFromUrl(pojogen.schemaUrl());
                     }else{
-                        inputStream = getInputStreamFromFileSchema(pojogen.schemeUrl());
+                        inputStream = getInputStreamFromFileSchema(pojogen.schemaUrl());
                     }
                 } catch (IOException e) {
                     throw new JschLibaryException("Can not get schema resource, check network or file path");
                 }
 
-                System.out.println("Load Stream");
                 JsonSchemaPojoGenerator pojoGenerator = new JsonSchemaPojoGenerator(
                         pojogen.packageName(), pojogen.className()
                         , inputStream
@@ -155,8 +144,6 @@ public class JsonSchemaPojoProcessor extends AbstractProcessor {
                             ,() -> superclassConfigData
                             ,() -> superinterfaceConfigData)
                         );
-
-                //System.out.println(pojoGenerator.generate());
 
                 writeBuilderFile(pojoGenerator.generate());
             } catch (IOException e) {
@@ -180,7 +167,6 @@ public class JsonSchemaPojoProcessor extends AbstractProcessor {
     }
 
     private void writeBuilderFile(Map<ClassName, String> classNameMap) throws IOException {
-        System.out.println(classNameMap);
         for(Map.Entry<ClassName, String> entry : classNameMap.entrySet()){
             JavaFileObject builderFile = processingEnv.getFiler().createSourceFile(entry.getKey().toString());
             try (PrintWriter out = new PrintWriter(builderFile.openWriter())) {

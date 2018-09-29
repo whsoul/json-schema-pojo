@@ -9,11 +9,11 @@ import javax.validation.constraints.NotEmpty;
 public class TestPojo {
 
     @JsonSchemaPojo(packageName = "com.test.sample0", className = "JsonSchema"
-            , schemeUrl = "http://json-schema.org/draft-04/schema")
+            , schemaUrl = "http://json-schema.org/draft-04/schema")
     public String webSchemaClass;
 
     @JsonSchemaPojo(packageName = "com.test.sample1", className = "Student"
-                    , schemeUrl = "sample_schema_01.json"
+                    , schemaUrl = "sample_schema_01.json"
                     , baseConfig = {
                         @JsonSchemaPojo.BaseConfig(
                                 feature = JSONSCHEMA_POJO_FEATURE.AUTO_POLYMOPHIC_ONEOF
@@ -57,7 +57,7 @@ public class TestPojo {
     public String sampleClass1;
 
     @JsonSchemaPojo(packageName = "com.test.sample2", className = "DocumentWithMeta"
-                    ,schemeUrl = "document_with_meta.json")
+                    ,schemaUrl = "document_with_meta.json")
     public String sampleClass2;
 
 

@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 public @interface JsonSchemaPojo {
     String packageName();
     String className();
-    String schemeUrl();
+    String schemaUrl();
 
     BaseConfig[] baseConfig() default {};
 
