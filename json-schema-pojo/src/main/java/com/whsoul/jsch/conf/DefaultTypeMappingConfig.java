@@ -14,7 +14,7 @@ public class DefaultTypeMappingConfig implements Config<String, TypeName>{
         put("boolean", TypeName.BOOLEAN);
         put("long", TypeName.LONG);
         put("integer", ClassName.get(Integer.class));
-        put("number", ClassName.get(Long.class));
+        put("number", ClassName.get(Double.class));
         put("array", ClassName.get(List.class));
         put("object", TypeName.OBJECT);
         put("null", ClassName.get(Void.class));
