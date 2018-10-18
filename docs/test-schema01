@@ -1,0 +1,109 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Pojo 02",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "category": {
+            "type": "string",
+            "enum": [
+                "A",
+                "B",
+                "C"
+            ]
+        },
+        "innerPojo": {
+            "$ref": "#/definitions/InnerPojo"
+        },
+        "extPojo": {
+            "$ref": "#/definitions/Pojo01"
+        }
+    },
+    "definitions": {
+        "InnerPojo": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "str": {
+                    "type": "string"
+                },
+                "integer": {
+                    "type": "integer"
+                }
+            }
+        },
+        "Pojo01": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "stringParam": {
+                    "type": "string"
+                },
+                "integerParam": {
+                    "type": "integer"
+                },
+                "intParam": {
+                    "type": "integer"
+                },
+                "wrapperLongParam": {
+                    "type": "integer"
+                },
+                "longParam": {
+                    "type": "integer"
+                },
+                "wrapperDoubleParam": {
+                    "type": "number"
+                },
+                "doubleParam": {
+                    "type": "number"
+                },
+                "wrapperFloatParam": {
+                    "type": "number"
+                },
+                "floatParam": {
+                    "type": "number"
+                },
+                "objectParam": {},
+                "listParam": {
+                    "type": "array",
+                    "items": {}
+                },
+                "arrayListParam": {
+                    "type": "array",
+                    "items": {}
+                },
+                "mapParam": {
+                    "type": "object",
+                    "additionalProperties": {}
+                },
+                "stringListParam": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "stringMapParam": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "stringIntegerMapParam": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "integer"
+                    }
+                },
+                "nullParam": {
+                    "type": "null"
+                }
+            },
+            "required": [
+                "intParam",
+                "longParam",
+                "doubleParam",
+                "floatParam"
+            ]
+        }
+    }
+}
