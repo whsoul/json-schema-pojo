@@ -49,16 +49,6 @@ public class JsonSchemaPojoGeneratorTest {
         System.out.println(pojoGenerator.generate());
     }
 
-
-    @Test
-    public void TypePojoGeneratorTest2(){
-        JsonSchemaPojoGenerator pojoGenerator = new JsonSchemaPojoGenerator("com.whsoul.pojo", "DocumentWithMeta", getFileStream("document_with_meta.json"));
-        Map<ClassName, String> result = pojoGenerator.generate();
-        System.out.println(result.keySet());
-        System.out.println(result);
-
-    }
-
     private InputStream getFileStream(String filePath){
         return getClass().getClassLoader().getResourceAsStream(filePath);
     }

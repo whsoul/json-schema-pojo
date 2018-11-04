@@ -53,14 +53,12 @@ public class PropertiesGenerateExecutor implements SchemaGenerateExecutor<Proper
                         .findFirst()
                         .orElse(null);
 
-                System.out.println(entry.getKey() + " Property SchemaObject field Append with : " + targetAppender);
                 if(targetAppender == null){
                     logger.warn("Not Supported Property Process for {}, please defined & set CustomProcess or remove it from schema", schemaObject.schemaType());
                 }else{
                     targetAppender.append(pojoGenerator, entry.getKey(), schemaObject);
                 }
             }else if(entry.getValue().isRef()){
-                System.out.println(entry.getKey() + " Property REF field Append with " + refPropertyAppender);
                 refPropertyAppender.append(pojoGenerator, entry.getKey(), entry.getValue().asSchemaRef());
             }
         }

@@ -51,34 +51,6 @@ public class JsonSchema2PoetPojoTest {
         javaFile.writeTo(System.out);
     }
 
-
-    @Test
-    public void test02() throws IOException {
-        JsonSchemaParser parser = new JsonSchemaParser(getFileStream("document_with_meta.json"));
-        SchemaObject schema = (SchemaObject)parser.getParsedSchema();
-        SimpleClassBuildWrapper simpleClassBuildWrapper = initCommonClassBuildWrapper("com.whsoul.test","DocumentWithMeta");
-
-        schema.properties.map.entrySet().stream()
-                .filter(e -> e.getValue() instanceof SchemaObject)
-                .map(e -> new AbstractMap.SimpleEntry<String, SchemaObject>(e.getKey(), (SchemaObject)e.getValue()))
-                .forEach(entry -> {
-                    if ((entry.getValue()).type.isSimpleType()) {
-                        addSimpleTypeField(simpleClassBuildWrapper, entry.getKey(), (entry.getValue()).type.getAnyOfValue(Value.SimpleTypeValue.class).getValue());
-                    }
-                });
-
-        TypeSpec typeSpec = simpleClassBuildWrapper.build();
-        JavaFile javaFile = JavaFile.builder("com.example.helloworld", typeSpec)
-                .build();
-
-        javaFile.writeTo(System.out);
-    }
-
-
-    private void addClassField(SimpleClassBuildWrapper simpleClassBuildWrapper, String fieldName, String packageName, String className) {
-        simpleClassBuildWrapper.addPublicField(ClassName.get(packageName, className), fieldName);
-    }
-
     private void addSimpleTypeField(SimpleClassBuildWrapper simpleClassBuildWrapper, String fieldName, SimpleTypes types){
         switch (types.type){
             case $string: {
@@ -103,10 +75,6 @@ public class JsonSchema2PoetPojoTest {
         }
     }
 
-    @Test
-    public void sss(){
-        System.out.println(SourceVersion.isIdentifier("@ctype"));
-    }
 
     private InputStream getFileStream(String filePath){
         return getClass().getClassLoader().getResourceAsStream(filePath);

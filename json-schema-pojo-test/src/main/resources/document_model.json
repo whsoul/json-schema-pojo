@@ -1,0 +1,257 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Standard Document Model",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "resources" : {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/definitions/ImageResource"
+          },
+          {
+            "$ref": "#/definitions/VideoResource"
+          },
+          {
+            "$ref": "#/definitions/AudioResource"
+          },
+          {
+            "$ref": "#/definitions/TextResource"
+          }
+        ]
+      }
+    },
+    "layout" : {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/definitions/SingleLayout"
+          },
+          {
+            "$ref": "#/definitions/HorizontalLayout"
+          },
+          {
+            "$ref": "#/definitions/VerticalLayout"
+          },
+          {
+            "$ref": "#/definitions/GridLayout"
+          }
+        ]
+      }
+    }
+
+  },
+  "required": [
+    "name"
+  ],
+  "definitions": {
+    "ImageResource": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "src": {
+          "type": "string"
+        },
+        "info": {
+          "$ref": "#/definitions/MediaMeta"
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "id",
+        "src",
+        "type"
+      ]
+    },
+    "VideoResource": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "src": {
+          "type": "string"
+        },
+        "info": {
+          "$ref": "#/definitions/MediaMeta"
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "playTime": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "encodingType": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "src",
+        "type"
+      ]
+    },
+    "AudioResource": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "src": {
+          "type": "string"
+        },
+        "info": {
+          "$ref": "#/definitions/MediaMeta"
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "playTime": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "encodingType": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "src",
+        "type"
+      ]
+    },
+    "TextResource": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "type",
+        "language"
+      ]
+    },
+    "ImageComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "compType": {
+          "type": "string",
+          "enum": [
+            "image"
+          ],
+          "default": "image"
+        },
+        "id": {
+          "type": "string"
+        },
+        "resource": {
+          "$ref": "#/definitions/ImageResource"
+        },
+        "caption": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParagraphComponent"
+          }
+        }
+      },
+      "title": "image",
+      "required": [
+        "compType",
+        "resource"
+      ]
+    },
+    "VideoComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "compType": {
+          "type": "string",
+          "enum": [
+            "video"
+          ],
+          "default": "video"
+        },
+        "id": {
+          "type": "string"
+        },
+        "resource": {
+          "$ref": "#/definitions/ImageResource"
+        },
+        "caption": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParagraphComponent"
+          }
+        },
+        "required": [
+          "id",
+          "compType",
+          "resource",
+          "caption"
+        ]
+      }
+    },
+    "MediaMeta": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "@ctype": {
+          "type": "string",
+          "enum": [
+            "mediaTag"
+          ],
+          "default": "mediaTag"
+        },
+        "fileSize": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "compType",
+        "fileSize"
+      ]
+    }
+  }
+}

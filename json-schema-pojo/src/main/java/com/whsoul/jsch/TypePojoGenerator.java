@@ -29,7 +29,6 @@ public class TypePojoGenerator {
     public void startProcess(){
         SchemaObject schema = (SchemaObject)this.parser.getParsedSchema();
         for(SchemaGenerateExecutor executor : this.context.getSchemaProcessRegistry().getSchemaProcessList()) {
-            System.out.println("Do Executor : " + executor);
             executor.execute(this, className, schema);
         }
     }

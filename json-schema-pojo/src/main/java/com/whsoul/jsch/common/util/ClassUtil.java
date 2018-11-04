@@ -34,18 +34,14 @@ public class ClassUtil {
 
     public static Class<?> guessIntersectionSuperClass(Class<?>... claz){
         List<Set<Class<?>>> superClassList = Arrays.stream(claz).map(ClassUtil::findSuperClassList).collect(Collectors.toList());
-        System.out.println(superClassList);
         Set<Class<?>> intersectClassList = findIntersectionClassList(superClassList.toArray(new Set[0]));
-        System.out.println(intersectClassList);
 
         return intersectClassList.stream().findFirst().get();
     }
 
     public static Class<?> guessIntersectionInterface(Class<?>... claz){
         List<Set<Class<?>>> superClassList = Arrays.stream(claz).map(ClassUtil::findInterfaceList).collect(Collectors.toList());
-        System.out.println(superClassList);
         Set<Class<?>> intersectClassList = findIntersectionClassList(superClassList.toArray(new Set[0]));
-        System.out.println(intersectClassList);
 
         return intersectClassList.stream().findFirst().get();
     }

@@ -12,6 +12,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class JsonSchemaPojoGenerator{
+    //TODO spec
+    // object type의 additionalProperties 처리
+    // definitions allOf, enum 처리
+    // class이름, property 이름 업퍼클레스 처리
+    // getter, setter 처리
+    // minItems, maxItems 처리
+
     private static Logger logger = LoggerFactory.getLogger(JsonSchemaPojoGenerator.class);
 
     private JschContext context;
@@ -28,14 +35,10 @@ public class JsonSchemaPojoGenerator{
     }
 
     public Map<ClassName, String> generate(){
-        System.out.println("JsonSchemaPojoGenerator start generate");
-
         Map<ClassName, String> result = new LinkedHashMap<>();
 
-        System.out.println("JsonSchemaPojoGenerator start generate (start main process)");
         this.context.getTypeRegistry().startMainProcess();
         result.put(this.context.getMainClassName(), this.context.getTypeRegistry().mainGenerate());
-        System.out.println("JsonSchemaPojoGenerator start generate (end main process)");
 
         this.context.getTypeRegistry().subTypesEntrySet().stream()
                 .forEach(entry -> entry.getValue().startProcess());
