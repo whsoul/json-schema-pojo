@@ -1,6 +1,7 @@
 package com.whsoul.jsch.conf;
 
 import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeName;
 
 import java.util.HashMap;
@@ -14,9 +15,9 @@ public class DefaultTypeMappingConfig implements Config<String, TypeName>{
         put("boolean", TypeName.BOOLEAN);
         put("long", TypeName.LONG);
         put("integer", ClassName.get(Integer.class));
-        put("number", ClassName.get(Long.class));
+        put("number", ClassName.get(Double.class));
         put("array", ClassName.get(List.class));
-        put("object", TypeName.OBJECT);
+        put("object", TypeName.get(Map.class));
         put("null", ClassName.get(Void.class));
     }};
 

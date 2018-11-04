@@ -16,19 +16,23 @@ public class TestPojo {
                     , schemaUrl = "sample_schema_01.json"
                     , baseConfig = {
                         @JsonSchemaPojo.BaseConfig(
-                                feature = JSONSCHEMA_POJO_FEATURE.AUTO_POLYMOPHIC_ONEOF
+                                feature = JSONSCHEMA_POJO_FEATURE.STRING_ENUM_AS_ENUM
                                 ,enable = true
                         )
                     }
                     , typeMappingConfig = {
-                        @JsonSchemaPojo.TypeMappingConfig(
-                                typeName = "string"
-                                , typeJavaClass = String.class
-                        ),
-                        @JsonSchemaPojo.TypeMappingConfig(
-                                typeName = "int"
-                                , typeJavaClass = int.class
-                        )
+                            @JsonSchemaPojo.TypeMappingConfig(
+                                    typeName = "string"
+                                    , typeJavaClass = String.class
+                            ),
+                            @JsonSchemaPojo.TypeMappingConfig(
+                                    typeName = "int"
+                                    , typeJavaClass = int.class
+                            ),
+                            @JsonSchemaPojo.TypeMappingConfig(
+                                    typeName = "xx"
+                                    , typeJavaClass = String.class
+                            )
                     }
                     , annotationConfig = {
                         @JsonSchemaPojo.AnnotationConfig(
@@ -60,9 +64,8 @@ public class TestPojo {
                     ,schemaUrl = "document_with_meta.json")
     public String sampleClass2;
 
+    @JsonSchemaPojo(packageName = "com.test.pojo4", className = "Datas", schemaUrl = "https://whsoul.github.io/json-schema-pojo/test-schema01.json")
+    public String Schema4;
 
-    public void setA(String x){
-        System.out.println(1234);
-    }
 
 }

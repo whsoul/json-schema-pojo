@@ -65,8 +65,6 @@ public class JsonSchemaPojoProcessor extends AbstractProcessor {
     public boolean process(Set<? extends TypeElement> annotations,
                            RoundEnvironment roundEnv) {
 
-        System.out.println("pojo gen process : ");
-
         for(Element element : roundEnv.getElementsAnnotatedWith(JsonSchemaPojo.class)){
             JsonSchemaPojo pojogen = element.getAnnotation(JsonSchemaPojo.class);
 
@@ -191,7 +189,6 @@ public class JsonSchemaPojoProcessor extends AbstractProcessor {
                 String key = entry.getKey().getSimpleName().toString();
                 Object value = entry.getValue().getValue();
 
-                System.out.println(value.toString());
                 if (JsonSchemaPojoType.BaseConfig.KEY.equals(key)) {
                     simpleMappingName = JSONSCHEMA_POJO_FEATURE.valueOf(value.toString());
                 }
@@ -255,6 +252,7 @@ public class JsonSchemaPojoProcessor extends AbstractProcessor {
                     typeName = ClassName.get((TypeMirror) value);
                 }
                 if (JsonSchemaPojoType.AnnotationConfig.EXTRA.equals(key)) {
+                    //TODO attach annotation with valueNames
                     valueNames = Stream.of(((String)value).split(",")).collect(Collectors.toList());
                 }
             }

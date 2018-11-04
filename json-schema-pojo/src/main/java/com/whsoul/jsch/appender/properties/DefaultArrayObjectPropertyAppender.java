@@ -16,6 +16,7 @@ import com.whsoul.jsch.schema.draft4.jackson.JacksonPolymorphicTypeRegister;
 import com.whsoul.jsch.schema.draft4.sub.definition.Value;
 import com.whsoul.jsch.util.ContextUtil;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.Map;
 
 public class DefaultArrayObjectPropertyAppender implements SchemaObjectPropertyAppender {
@@ -43,8 +44,13 @@ public class DefaultArrayObjectPropertyAppender implements SchemaObjectPropertyA
                 genericType = description.definitionName;
             }else {
                 SchemaObject subSchemaObject = schema.asSchemaObject();
+
+                if(SchemaObject.TYPE.emptyObject.equals(subSchemaObject.schemaType())){
+                    //do nothing empty subObject
+                    genericType = null;
+                }
                 //TODO CustomProcess  (and anyOf, allOf)
-                if (subSchemaObject.schemaType().equals(SchemaObject.TYPE.oneOfObject)) {
+                else if (subSchemaObject.schemaType().equals(SchemaObject.TYPE.oneOfObject)) {
                     JacksonPolymorphicTypeRegister generator = new JacksonPolymorphicTypeRegister(baseGenerator, baseGenerator.getClassName(), propertyName, subSchemaObject);
                     generator.regist();
 
@@ -62,7 +68,7 @@ public class DefaultArrayObjectPropertyAppender implements SchemaObjectPropertyA
             }
         }
 
-        TypeName typeName = ParameterizedTypeName.get(baseTypeName, genericType);
+        TypeName typeName = genericType == null ? baseTypeName : ParameterizedTypeName.get(baseTypeName, genericType);
 
         NormalizedFieldAppendUtil.addClassField(baseGenerator.getContext().getConfigRegistry(), baseGenerator.getBuildWrapper(), propertyName, typeName);
     }
