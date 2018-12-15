@@ -1,0 +1,170 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Temp",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "total": {
+      "type": "integer"
+    },
+    "totalPages": {
+      "type": "integer"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Result"
+      }
+    }
+  },
+  "definitions": {
+    "Result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "width": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
+        },
+        "color": {
+          "type": "string"
+        },
+        "likes": {
+          "type": "integer"
+        },
+        "likedByUser": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "currentUserCollections": {
+          "type": "array",
+          "items": {}
+        },
+        "urls": {
+          "$ref": "#/definitions/Urls"
+        },
+        "links": {
+          "$ref": "#/definitions/Links_"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "instagramUsername": {
+          "type": "string"
+        },
+        "twitterUsername": {
+          "type": "string"
+        },
+        "portfolioUrl": {
+          "type": "string"
+        },
+        "profileImage": {
+          "$ref": "#/definitions/ProfileImage"
+        },
+        "links": {
+          "$ref": "#/definitions/Links"
+        }
+      }
+    },
+    "ProfileImage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "small": {
+          "type": "string"
+        },
+        "medium": {
+          "type": "string"
+        },
+        "large": {
+          "type": "string"
+        }
+      }
+    },
+    "Links": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "self": {
+          "type": "string"
+        },
+        "html": {
+          "type": "string"
+        },
+        "photos": {
+          "type": "string"
+        },
+        "likes": {
+          "type": "string"
+        }
+      }
+    },
+    "Urls": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "raw": {
+          "type": "string"
+        },
+        "full": {
+          "type": "string"
+        },
+        "regular": {
+          "type": "string"
+        },
+        "small": {
+          "type": "string"
+        },
+        "thumb": {
+          "type": "string"
+        }
+      }
+    },
+    "Links_": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "self": {
+          "type": "string"
+        },
+        "html": {
+          "type": "string"
+        },
+        "download": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

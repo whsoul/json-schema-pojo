@@ -7,6 +7,7 @@ import com.kjetland.jackson.jsonSchema.JsonSchemaGenerator;
 import com.squareup.javapoet.ClassName;
 import com.whsoul.jsch.pojo.Pojo01;
 import com.whsoul.jsch.pojo.Pojo02;
+import com.whsoul.jsch.pojo.Pojo03;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -51,6 +52,25 @@ public class PojoToSchemaTest {
         System.out.println(jsonSchemaAsString);
 
         JsonSchemaPojoGenerator pojoGenerator = new JsonSchemaPojoGenerator("com.whsoul.jsch.pojo", "Pojo01", isr);
+        Map<ClassName, String> result = pojoGenerator.generate();
+        System.out.println(result);
+
+    }
+
+
+    @Test
+    public void pojo03() throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonSchemaGenerator jsonSchemaGenerator = new JsonSchemaGenerator(objectMapper);
+
+        JsonNode jsonSchema = jsonSchemaGenerator.generateJsonSchema(Pojo03.class);
+        String jsonSchemaAsString = objectMapper.writeValueAsString(jsonSchema);
+        byte[] jsonSchemaByte = objectMapper.writeValueAsBytes(jsonSchema);
+        ByteArrayInputStream isr = new ByteArrayInputStream(jsonSchemaByte);
+
+        System.out.println(jsonSchemaAsString);
+
+        JsonSchemaPojoGenerator pojoGenerator = new JsonSchemaPojoGenerator("com.whsoul.jsch.pojo", "Pojo03", isr);
         Map<ClassName, String> result = pojoGenerator.generate();
         System.out.println(result);
 
