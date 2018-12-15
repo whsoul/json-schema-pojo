@@ -8,7 +8,7 @@ Just add maven repository dependency,
 
 ~~~
     <dependency>
-        <groupId>com.whsoul</groupId>
+        <groupId>com.github.whsoul</groupId>
         <artifactId>json-schema-pojo</artifactId>
         <version>X.Y.Z</version>
     </dependency>
