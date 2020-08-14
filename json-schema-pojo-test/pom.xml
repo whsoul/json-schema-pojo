@@ -10,7 +10,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.whsoul</groupId>
+            <groupId>com.github.whsoul</groupId>
             <artifactId>json-schema-pojo</artifactId>
             <version>0.1.0</version>
             <scope>provided</scope>
